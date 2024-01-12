@@ -1,8 +1,9 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <zip.h>
-#include <dirent.h>
+#include <filesystem>
+#include <regex>
+namespace fs = std::filesystem;
 // Function to upload a file using curl
 void upload(const std::string& filename)
 {
@@ -58,7 +59,42 @@ void calculateHash(const std::string& filename, bool sha=false){
     system(("\"" + command + "\"").c_str());
     
 }
-void zipFile(){}
+void searchFile(const std::string& directory, const std::string& targetFileName) {
+    bool found = false;
+    // regex to match the filename to support iterating
+    std::regex backslash("\\\\");
+    std::regex quotations("\"");
+    // Replace backslashes with forward slashes
+    std::string modifiedDirectory = std::regex_replace(directory, backslash, "/");
+    // Remove quotations
+    modifiedDirectory = std::regex_replace(modifiedDirectory, quotations, "");
+    fs::path path(modifiedDirectory);
+    // Escape special characters in the targetFileName
+    std::string escapedPattern = std::regex_replace(targetFileName, std::regex("([.^$|()\\[\\]{}*+?])"), "\\$1");
+    std::regex regexPattern(escapedPattern, std::regex_constants::icase); // Case-insensitive
+    for (const auto& entry : fs::directory_iterator(modifiedDirectory)) {
+        if (entry.is_regular_file()) {
+            //to store matched subexpressions
+            std::smatch match;
+            std::string filename = entry.path().filename().string();
+            if (std::regex_search(filename, match, regexPattern)) {
+                std::cout << "File found: " << entry.path() << std::endl;
+                found = true;
+            }
+
+        }
+        else if (entry.is_directory()) {
+                searchFile(entry.path().string(), targetFileName);
+            }
+    }
+     if (!found) {
+         std::cout << "File not found in: " << modifiedDirectory << std::endl;
+    }
+
+}
+
+   
+
 void fileUploadMenu() {
     while (true)
     {
@@ -215,6 +251,34 @@ void hashMenu(){
         break;
     }
 }
+void searchMenu(){
+    while(true){
+    system("cls");
+    unsigned int choice;
+    std::string directory;
+    std::string targetFileName;
+    std::cout << "Enter the directory path where you want to search for the file: ";
+    std::getline(std::cin, directory);
+    std::cout << "Enter the file name: ";
+    std::getline(std::cin, targetFileName);
+    searchFile(directory, targetFileName);
+    std::cout << "\n\n1. Seach for another file\n";
+    std::cout << "2. Return to main menu\n";
+    std::cout << "Enter your choice: ";
+    std::cin >> choice;
+    std::cin.ignore();
+    switch (choice) {
+        case 1:
+            continue;
+        case 2:
+            break;
+        default:
+            std::cout << "Invalid Choice";
+            continue;
+        }
+        break;
+          }
+}
 int main() 
 {
         while (true)
@@ -225,7 +289,8 @@ int main()
             std::cout << "1. File Upload\n";
             std::cout << "2. File hide menu\n";
             std::cout << "3. File encryption menu\n";
-            std::cout << "4. File hash calculator\n";
+            std::cout << "4. File hash calculator\n";\
+            std::cout << "5. File Searcher\n";
             std::cout << "8. Exit\n";
             std::cout << "Enter your choice: ";
 
@@ -247,7 +312,11 @@ int main()
             case 4:
                 hashMenu();
                 break;
+            case 5:
+                searchMenu();
+                break;
             case 8:
+                system("cls");
                 std::cout << "Exiting...";
                 return 0;
             default:
@@ -257,4 +326,3 @@ int main()
 
         }
     }
-
