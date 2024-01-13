@@ -26,7 +26,15 @@ Pre requisites:
 - [Msys2](https://www.msys2.org/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 
-## Step 1: Run this command in Msys2 ucrt64 shell
+## Step 1 :
+1.  In the Windows search bar, type **Settings** to open your Windows Settings.
+2.  Search for **Edit environment variables for your account**.
+3.  In your **User variables**, select the `Path` variable and then select **Edit**.
+4.  Select **New** and add the MinGW-w64 destination folder you recorded during the installation process to the list. If you used the default settings above, then this will be the path: `C:\msys64\ucrt64\bin`.
+5.  Select **OK** to save the updated PATH. You will need to reopen any console windows for the new PATH location to be available.
+
+
+## Step 2: Run this command in Msys2 ucrt64 shell
 ```bash
   pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-7zip
 ```
@@ -37,3 +45,4 @@ Pre requisites:
 - [@juttsalmanmalhi](https://www.instagram.com/juttsalmanmalhi/)
 - [@tayyabawan511](https://www.instagram.com/tayyabawan511/)
 - [@afaq_kahloon](https://www.instagram.com/afaq_kahloon/)
+
