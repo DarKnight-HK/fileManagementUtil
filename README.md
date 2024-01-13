@@ -41,18 +41,18 @@ Pre requisites:
 ## Step 3: Get the source files
 - If you have git installed, run this command
 ```bash
-	git clone https://github.com/DarKnight-HK/fileManagementUtil.git
+  git clone https://github.com/DarKnight-HK/fileManagementUtil.git
 ```
 - Or just download zip using this [link](https://github.com/DarKnight-HK/fileManagementUtil)
 
 ## Step 4: Compile the code
 - Open a command prompt in the directory the files are present at and run this command
 ```bash
-	mingw32-make
+  mingw32-make
 ```
 - Now run this command to delete the obj files
 ``` bash
-	mingw32-make clean
+  mingw32-make clean
 ```
 ## Authors
 
