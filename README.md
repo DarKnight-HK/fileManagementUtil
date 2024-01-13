@@ -26,7 +26,7 @@ Pre requisites:
 - [Msys2](https://www.msys2.org/)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - Git (OPTIONAL)
-## Step 1 :
+## Step 1 : Add Msys2 to path
 1.  In the Windows search bar, type **Settings** to open your Windows Settings.
 2.  Search for **Edit environment variables for your account**.
 3.  In your **User variables**, select the `Path` variable and then select **Edit**.
