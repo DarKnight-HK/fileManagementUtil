@@ -25,4 +25,4 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	del $(OBJS) $(TARGET)
+	del $(OBJS)
