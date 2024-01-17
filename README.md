@@ -11,7 +11,6 @@ This utility provides a set of features to efficiently manage files on your syst
 - **Recursive File Search:** Easily locate files within directories and subdirectories.
 - **File Sorting:** Sort files based on their extensions for better organization.
 - **File Compression and Decompression:** Compress and decompress files efficiently.
-Certainly! Below are some use cases demonstrating how the File Management Utility can be applied:
 
 ## Use Cases
 
