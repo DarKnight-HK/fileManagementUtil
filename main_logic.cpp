@@ -143,7 +143,10 @@ void sortFiles(const std::string& directory){
         {".xlsx", "MS Excel Files"},
         {".mp3", "Audio Files"},
         {".py", "Python Source Files"},
-        {".ppt", "MS PowerPoint files"}
+        {".ppt", "MS PowerPoint files"},
+        {".jpg", "Photos"},
+        {".jpeg", "Photos"},
+        {".png", "Photos"}
     };
     for(const auto& entry: fs::directory_iterator(modifiedDirectory)){
         if(entry.is_regular_file()){
